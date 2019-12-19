@@ -2,7 +2,7 @@
 #attr_reader ,attr_accessor, class and instance variables, public ,private ,protected
 
 class Today
-	attr_reader :name, :gender
+attr_reader :name, :gender
 	# creates reader. instead of writing getter for each and every variable 
 	#attr_reader shortens the code and works in place of getter	
   attr_writer :gender 
