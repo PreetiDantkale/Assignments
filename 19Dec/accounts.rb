@@ -4,7 +4,7 @@ class Accounts
   def initialize(name)
     @@name = name
   end
-
+  
   public
   def account_create
     @account_num = rand(10000) 
