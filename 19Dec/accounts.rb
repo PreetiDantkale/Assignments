@@ -1,17 +1,17 @@
 class Accounts
-  protected
-  attr_accessor :name , :account_num , :amount
+  attr_accessor :name ,:account_num , :amount
   
   def initialize(name)
-    @name = name
+    @@name = name
   end
+
   public
   def account_create
     @account_num = rand(10000) 
     puts "Your account number #{account_num}"
     puts "Deposit minimum of 1000 RS. Enter amount:"
     @amount = gets.chomp.to_i
-    if @amount < 1000
+    while @amount < 1000
       puts "Deposit atleast 1000"
       puts "Deposit minimum of 1000 RS. Enter amount:"
       @amount = gets.chomp.to_i
@@ -21,23 +21,32 @@ class Accounts
   def deposit
     puts "Enter Deposit Amount"
     deposit_amount = gets.chomp.to_i
+    if(deposit_amount <= 0)
+      p "Deposit amount is invalid .. Please enter valid amount"
+      deposit
+    else
     @amount = @amount + deposit_amount
     puts "#{deposit_amount} deposited"
+    end
   end
 
   def withdraw
     puts "Enter Withdraw Amount"
     withdraw_amount = gets.chomp.to_i
-    if @amount >= withdraw_amount
+    if(withdraw_amount <= 0)
+      p "Withdraw amount is invalid .. Please enter valid amount"
+    elsif @amount >= withdraw_amount
     @amount = @amount - withdraw_amount
     puts "#{withdraw_amount} Withdrawn"
-    else 
+    elsif @amount <= withdraw_amount 
       puts "Withdraw amount is greater than account balance"
     end
   end
 
   def get_balance
-    puts "Your account balance is #{@amount}"
+    puts "Account Number #{account_num}"
+    puts "Account Holder Name #{@@name}"
+    puts "Your account balance is #{amount}"
   end
 end
 
@@ -58,11 +67,10 @@ class Savings < Accounts
     print "Your interest rate is "
     puts interest
   end
-
 end
 
 class Current < Accounts
-  @@current = 4.8
+  @@current_rate = 4.8
   def initialize(months)
     @months = months
   end
@@ -73,11 +81,10 @@ class Current < Accounts
   end
 
   def current_calculate
-    interest = (@months * @amount * @@saving_rate)/100
+    interest = (@months * @amount * @@current_rate)/100
     print "Your interest rate is "
     puts interest
   end
-
 end
 
   a = Accounts.new("Preeti")
@@ -85,60 +92,74 @@ end
   puts "1.Savings"
   puts "2.Current"
   puts "Enter the account type you wish to create (1=Savings 2=Current) "
-  type = gets.chomp.to_i
+  account_type = gets.chomp.to_i
 
-  if type==1
+  case account_type
+  when 1
     puts "Enter the total number of months "
-    month = gets.chomp.to_i
-    s = Savings.new(month)
+    months = gets.chomp.to_i
+    if months <= 0
+      p "Enter Valid month"
+    else
+    s = Savings.new(months)
     s.account_create
     s.saving_calculate
-    operation=0
-    while operation!=4
+    operation=1
+    while operation >=1 && operation <=4
       puts "You would like to"
       puts "1.Deposit"
       puts "2.Withdraw"
       puts "3.Get Balance"
       puts "4.Exit"
-
       operation = gets.chomp.to_i
-      if operation==1
+      case operation
+      when 1
         s.deposit
         s.get_balance
-      elsif operation==2
+      when 2
         s.withdraw
         s.get_balance
-      elsif operation==3
+      when 3
         s.get_balance
+      when 4
+        exit
+      else
+        p "Invalid Choice of operation"
       end
     end
-  elsif type==2
+  end
+  when 2
     puts "Enter the total number of months "
-    month = gets.chomp.to_i
-    s = Current.new(month)
-    s.account_create
-    s.saving_calculate
-    operation=0
-    while operation!=4
+    months = gets.chomp.to_i
+    c = Current.new(months)
+    if months <= 0
+      p "Enter Valid months"
+    else
+      c.account_create
+      c.current_calculate
+      operation=1
+    while operation >=1 && operation <=4
       puts "You would like to"
       puts "1.Deposit"
       puts "2.Withdraw"
       puts "3.Get Balance"
       puts "4.Exit"
-
       operation = gets.chomp.to_i
-      if operation==1
-        s.deposit
-        s.get_balance
-      elsif operation==2
-        s.withdraw
-        s.get_balance
-      elsif operation==3
-        s.get_balance
+      case operation
+      when 1
+        c.deposit
+        c.get_balance
+      when 2
+        c.withdraw
+        c.get_balance
+      when 3
+        c.get_balance
+      when 4
+        exit
+      else
+        p "Invalid Choice of operation"
       end
-    end
-  else
-    puts "Invalid Selection"
+    end 
+  end
 end
-
-    
+        
