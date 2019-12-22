@@ -24,6 +24,7 @@ class Today
 	def Today.Class_method2
 		p "This is another way to create class method"
 	end
+
 	#Can be called by everyone. No access control
 	public
 	def instance_method
@@ -46,6 +47,7 @@ class Today
 	self.Class_method
 	Today.Class_method2
 	end
+	
 	t=Today.new("Preeti","Female","Pune")
 	t.instance_method
 	puts t.name
@@ -55,11 +57,10 @@ class Today
 	#t.demo_protected		
 	#t.demo_private
 
-	#Output
-	# "This is class method.Class methods are called on class. To call class method \n\tinstance is not required. It provides functionality to the class itself."
+#Output
+# "This is class method.Class methods are called on class. To call class method \n\tinstance is not required. It provides functionality to the class itself."
 # "This is another way to create class method"
 # "It provides functionality to particular instance of class. \n\tThese methods are called on instance of class."
 # Preeti
 # Female
 # Pune
-

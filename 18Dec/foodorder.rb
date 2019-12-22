@@ -1,25 +1,21 @@
 class FoodOrder
 	attr_reader :name
 	public
-	@order
-	@status
-	@bill
 	@@menu=Hash.new
 	@@menu={"MANCHURIAN"=>40,"NOODLES"=>70,"SCHEZWAN RICE"=>90,"SCHEZWAN NOODLES"=>80,"MANCHOW SOUP"=>20,"RICE"=>60}
+
 	def initialize(name)
 		@name=name
 	end
-	public
+
 	def accept_order
 		puts "---Enter you order--"
 		@order=gets.chomp
-
 		@order=@order.upcase
 	end
 
 	def show_menu
 		puts "***********MENU ITEMS***********"
-
 		@@menu.each do |key, value|
 			puts "#{key} -- Rs.#{value}"
 		end
@@ -35,13 +31,11 @@ class FoodOrder
 			puts "#{@order} Not Available"
 			@status="NOT AVAILABLE "
 		end
-		
-		
 	end
+
 	def order_status
 		puts "Status of your order #{@order}"
 	end
-
 
 	def change_status
 		if @status=="AVAILABLE"
@@ -53,17 +47,18 @@ class FoodOrder
 			sleep 5
 			@status="ORDER DELIVERED"
 			puts @status
-	else puts @status
+		else 
+		puts @status
 	end
 end
 end
 
 f1=FoodOrder.new("Preeti")
-
 f1.show_menu
 puts f1.name
 f1.accept_order
 f1.check_item
 f1.order_status
 f1.change_status
+
 
