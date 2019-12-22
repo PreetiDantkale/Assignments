@@ -1,3 +1,4 @@
+#Program for Prime number
 puts "Enter the number:"
 num=gets.chomp.to_i
 count=0
