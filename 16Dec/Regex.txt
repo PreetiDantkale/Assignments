@@ -1,0 +1,39 @@
+IFSC Code Regex
+/\A[a-zA-Z]{4}+[0]{1}+[0-9]{6}\Z/.match('unio0123456')
+ => #<MatchData "unio0123456"> 
+
+email
+/\A\w+[.]*\w+[@]{1}[a-zA-Z]+[.][a-zA-Z]+\Z/.match('preeti.dtk@gmail.com')
+ => #<MatchData "preeti.dtk@gmail.com"> 
+
+/\A\w+[.]*\w+[@]{1}[a-zA-Z]+[.][a-zA-Z]+\Z/.match('preeti_dtk@gmail.com')
+ => #<MatchData "preeti_dtk@gmail.com"> 
+
+/\A\w+[.]*\w+[@]{1}[a-zA-Z]+[.][a-zA-Z]+[.]*[a-zA-Z]*\Z/.match('_preeti.dtkv_@gmailsxdxs.com')
+ => #<MatchData "_preeti.dtkv_@gmailsxdxs.com"> 
+
+PAN
+/\A[A-Z]{5}[0-9]{4}[A-Z]{1}\Z/.match('CQPSD1234C')
+ => #<MatchData "CQPSD1234C"> 
+
+
+GST
+/\A[0-35]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[Z][a-z A-Z 0-9]{1}\Z/.match('22ABCDE1234C1Zb')
+ => #<MatchData "22ABCDE1234C1Zb"> 
+
+Name
+ /\A[a-zA-Z]+\s*[a-zA-Z]*\Z/.match("Preeti Dantkale")
+ => #<MatchData "Preeti Dantkale"> 
+
+Male - Female
+ /[M m]*[F f]*/.match("m")
+ => #<MatchData "m"> 
+
+Amount
+/[0-9]*[.]*[0-9]+/.match("0.90")
+ => #<MatchData "0.90"> 
+
+Mobile Number
+/[1-9]{1}[0-9]{9}+/.match("9123456789")
+ => #<MatchData "9123456789"> 
+
