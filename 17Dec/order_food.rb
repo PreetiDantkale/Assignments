@@ -1,20 +1,17 @@
-class Food_Order
+class FoodOrder
 	attr_reader :name
 	public
-	@order
-	@status
-	@bill
-	@@menu=Hash.new
-	@@menu={"MANCHURIAN"=>40,"NOODLES"=>70,"SCHEZWAN RICE"=>90,"SCHEZWAN NOODLES"=>80,"MANCHOW SOUP"=>20,"RICE"=>60}
+	@@menu = Hash.new
+	@@menu = {"MANCHURIAN"=>40,"NOODLES"=>70,"SCHEZWAN RICE"=>90,"SCHEZWAN NOODLES"=>80,"MANCHOW SOUP"=>20,"RICE"=>60}
+	
 	def initialize(name)
-		@name=name
+		@name = name
 	end
 
-	public
 	def accept_order
 		puts "---Enter you order--"
-		@order=gets.chomp
-		@order=@order.upcase
+		@order = gets.chomp
+		@order = @order.upcase
 	end
 
 	def show_menu
@@ -27,12 +24,12 @@ class Food_Order
 	def check_item
 		if @@menu.has_key?(@order)
 			puts "---#{@order} is Available---"
-			@status="AVAILABLE"
-			@bill=@@menu.fetch(@order)
+			@status = "AVAILABLE"
+			@bill = @@menu.fetch(@order)
 			puts @status
 		else
 			puts "#{@order} Not Available"
-			@status="NOT AVAILABLE "
+			@status = "NOT AVAILABLE "
 		end
 	end
 
@@ -41,14 +38,14 @@ class Food_Order
 	end
 
 	def change_status
-		if @status=="AVAILABLE"
+		if @status == "AVAILABLE"
 			sleep 5
-			@status =" ORDER ACCEPTED"
+			@status = "ORDER ACCEPTED"
 			puts @status
 			puts "Your Bill Amount #{@bill}"
 			puts "Please Wait for Sometime"		
 			sleep 5
-			@status="ORDER DELIVERED"
+			@status = "ORDER DELIVERED"
 			puts @status
 		else 
 			puts @status
