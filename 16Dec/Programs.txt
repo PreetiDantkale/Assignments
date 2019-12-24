@@ -1,0 +1,51 @@
+1. wap to display number is prime or not
+2. WAP for students to print their school level according to grade
+e.g -
+if grade is between 1-5 return elementary
+if grade is between 6-8 return middle school
+if grade is between 9-12 return high school
+if grade is between otherwise return college
+3. Print a-z in reverse order
+4. Regex for mobile number, email address, name, gender(M / F) and  amount
+
+-----------------------------------------------
+Prime .rb
+
+puts "Enter the number:"
+num=gets.chomp.to_i
+count=0
+i=1
+
+while(i<=num)
+if (num%i==0)
+ count=count+1
+end
+i=i+1
+end
+if count==2
+puts "Prime number"
+else
+puts "Not a prime number"
+end
+---------------------------------------------
+Grades
+grade=gets.chomp.to_i
+ => 11 
+if grade>=1 and grade<=5  
+puts "Elementary"
+elsif grade>=6 and grade<=8
+puts "Middle School"
+elsif grade>=9 and grade<=12
+puts "High School"
+else
+puts "College"
+end
+High School
+
+------------------------------------------------
+Reverse
+alpha=("a".."z").to_a
+alpha.reverse
+
+-------------------------------------------------
+
