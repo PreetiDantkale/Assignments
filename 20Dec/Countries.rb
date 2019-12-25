@@ -12,6 +12,7 @@
 # 2. Whether the country can have a seat in the UN (United Nations) Security council.
 # 3. Whether the country can win the war or not
 
+#Module to check whether country can win war or not based on army strength
 module War
   
   def win_war? army_strength
@@ -21,6 +22,7 @@ module War
   
 end
 
+#Module to check whether country can get loan or not based on state and gdp
 module Loan
 
   def loan_from_IMF? state_of_country , gdp 
@@ -35,6 +37,7 @@ module Loan
 
 end
 
+#Module to check whether country can get seat in UN security council or not based on army strength , gdp , state of country
 module UN_seat
   
   def seat? gdp, army_strength , state_of_country
@@ -54,6 +57,7 @@ class Countries
 
   @@countries_list = Hash.new
 
+  #Get information of Country
   def input_country
 
     puts "Enter your Country name"
@@ -73,102 +77,104 @@ class Countries
 
   end
 
+  #Display all countries
   def display_country
     puts @@countries_list
   end
 
   country = Countries.new
   country.input_country
+
   while true
-  puts "1. Input Country"
-  puts "2. Display Country"
-  puts "3. Get Loan from IMF"
-  puts "4. Get Loan from World Bank"
-  puts "5. Seat in UN"
-  puts "6. Win war"
-  puts "Select a option"
-  option = gets.chomp.to_i
-  case option
-  when 1
-    country.input_country
+    puts "1. Input Country"
+    puts "2. Display Country"
+    puts "3. Get Loan from IMF"
+    puts "4. Get Loan from World Bank"
+    puts "5. Seat in UN"
+    puts "6. Win war"
+    puts "Select a option"
+    option = gets.chomp.to_i
+    case option
+    when 1
+      country.input_country
 
-  when 2
-    country.display_country
+    when 2
+      country.display_country
 
-  when 3
-    puts "Enter your country name"
-    country_name = gets.chomp.upcase
+    when 3
+      puts "Enter your country name"
+      country_name = gets.chomp.upcase
 
-    if @@countries_list.has_key?(country_name)
-      state_of_country = @@countries_list[country_name]['state_of_country']
-      gdp = @@countries_list[country_name]['gdp']
+      if @@countries_list.has_key?(country_name)
+        state_of_country = @@countries_list[country_name]['state_of_country']
+        gdp = @@countries_list[country_name]['gdp']
 
-      if country.loan_from_IMF? state_of_country , gdp
-        puts "#{country_name} can get loan from IMF"
+        if country.loan_from_IMF? state_of_country , gdp
+          puts "#{country_name} can get loan from IMF"
+        else
+          puts "#{country_name} cannot get loan from IMF"
+        end
       else
-        puts "#{country_name} cannot get loan from IMF"
+        puts "Country does not exists in list"
       end
+
+    when 4
+      puts "Enter your country name"
+      country_name = gets.chomp.upcase
+
+      if @@countries_list.has_key?(country_name)
+        gdp = @@countries_list[country_name]['gdp']
+
+        if country.loan_from_WorldBank? gdp
+          puts "#{country_name} can get loan from World Bank"
+        else
+          puts "#{country_name} cannot get loan from World Bank"
+        end
+      else
+        puts "Country does not exists in list"
+      end
+
+    when 5
+      puts "Enter your country name"
+      country_name = gets.chomp.upcase
+
+      if @@countries_list.has_key?(country_name)
+        gdp = @@countries_list[country_name]['gdp']
+        army_strength = @@countries_list[country_name]['army_strength']
+        state_of_country = @@countries_list[country_name]['state_of_country']
+
+        if country.seat? gdp , army_strength , state_of_country
+          puts "#{country_name} can get a seat in UN Security council"
+        else
+          puts "#{country_name} cannot get a seat in UN Security council"
+        end
+      else
+        puts "Country does not exists in list"
+      end
+
+    when 6
+      puts "Enter your country name"
+      country_name = gets.chomp.upcase
+      
+      if @@countries_list.has_key?(country_name)
+        army_strength = @@countries_list[country_name]['army_strength']
+
+        if country.win_war? army_strength
+          puts "#{country_name} can win war"
+        else
+          puts "#{country_name} cannot win war"
+        end
+      else
+        puts "Country does not exists in list"
+      end
+
     else
-      puts "Country does not exists in list"
+      puts "Invalid choice"
     end
 
-  when 4
-    puts "Enter your country name"
-    country_name = gets.chomp.upcase
-
-    if @@countries_list.has_key?(country_name)
-      gdp = @@countries_list[country_name]['gdp']
-
-      if country.loan_from_WorldBank? gdp
-        puts "#{country_name} can get loan from World Bank"
-      else
-        puts "#{country_name} cannot get loan from World Bank"
-      end
-    else
-      puts "Country does not exists in list"
+    puts "Enter X to exit any character to Continue"
+    if gets.chomp.upcase == 'X'
+      exit
     end
-
-  when 5
-    puts "Enter your country name"
-    country_name = gets.chomp.upcase
-
-    if @@countries_list.has_key?(country_name)
-      gdp = @@countries_list[country_name]['gdp']
-      army_strength = @@countries_list[country_name]['army_strength']
-      state_of_country = @@countries_list[country_name]['state_of_country']
-
-      if country.seat? gdp , army_strength , state_of_country
-        puts "#{country_name} can get a seat in UN Security council"
-      else
-        puts "#{country_name} cannot get a seat in UN Security council"
-      end
-    else
-      puts "Country does not exists in list"
-    end
-
-  when 6
-    puts "Enter your country name"
-    country_name = gets.chomp.upcase
-    
-    if @@countries_list.has_key?(country_name)
-      army_strength = @@countries_list[country_name]['army_strength']
-
-      if country.win_war? army_strength
-        puts "#{country_name} can win war"
-      else
-        puts "#{country_name} cannot win war"
-      end
-    else
-      puts "Country does not exists in list"
-    end
-
-  else
-    puts "Invalid choice"
-  end
-
-  puts "Enter X to exit any character to Continue"
-  if gets.chomp.upcase == 'X'
-    exit
-  end
-  end
+ end
 end
